@@ -68,7 +68,7 @@ step_3_database() {
   echo "${JAUNE}Commence l'étape 3 base de données${NORMAL}"
   echo "mysql-server mysql-server/root_password password ${MYSQL_ROOT_PASSWD}" | debconf-set-selections
   echo "mysql-server mysql-server/root_password_again password ${MYSQL_ROOT_PASSWD}" | debconf-set-selections
-  apt_install mysql-client mysql-common mysql-server
+  apt_install default-mysql-client mysql-common default-mysql-server
   
   mysqladmin -u root password ${MYSQL_ROOT_PASSWD}
   
@@ -103,12 +103,12 @@ step_4_apache() {
 step_5_php() {
   echo "---------------------------------------------------------------------"
   echo "${JAUNE}Commence l'étape 5 php${NORMAL}"
-  apt-get -y install php7.0 php7.0-curl php7.0-gd php7.0-imap php7.0-json php7.0-mcrypt php7.0-mysql php7.0-xml php7.0-opcache php7.0-soap php7.0-xmlrpc libapache2-mod-php7.0 php7.0-common php7.0-dev php7.0-zip php7.0-ssh2 php7.0-mbstring
+  apt-get -y install php7.3 php7.3-curl php7.3-gd php7.3-imap php7.3-json php7.1-mcrypt php7.3-mysql php7.3-xml php7.3-opcache php7.3-soap php7.3-xmlrpc libapache2-mod-php7.3 php7.3-common php7.3-dev php7.3-zip php7.3-ssh2 php7.3-mbstring
   if [ $? -ne 0 ]; then
     apt_install libapache2-mod-php5 php5 php5-common php5-curl php5-dev php5-gd php5-json php5-memcached php5-mysqlnd php5-cli php5-ssh2 php5-redis php5-mbstring
     apt_install php5-ldap
   else
-    apt-get -y install php7.0-ldap
+    apt-get -y install php7.3-ldap
   fi
   echo "${VERT}étape 5 php réussie${NORMAL}"
 }
